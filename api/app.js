@@ -18,10 +18,19 @@ router.get('/', function(req, res) {
 
 router.get('/grid', function(req, res) {
 
+  var matrix = []
+
   grid.build(10, 10, function(res){
     console.log("res", res)
-    
+    matrix = res
+
+    grid.setMines(matrix, function(res2){
+      console.log("res2", res2)
+    })
+
   })
+
+
    res.send("grid");
 });
 
