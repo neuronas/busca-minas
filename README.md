@@ -1,10 +1,30 @@
 # busca-minas
 
 
+## API
 
-## Iniciar API
+se utilizo un servidor NODE con Express que se instala rapidamente y su implementacion es simple
 
+para instalar las librerias en el ambiente que se va a correr, (dentro del directorio /api)
+
+```bash
+$ npm install
+```
+
+para levantar el servidor api REST desde el directorio raiz:
 
 ```bash
 $ node api/app.js
 ```
+
+inicia el servidor en http://localhost:3000
+
+(para su uso y teteo en ambiente local se habilitaron las llamadas curl modificando los HEADERS que espera el servidor)
+
+## cliente
+
+el cliente es un archivo index.html que accede al recurso (POST) http://localhost:3000/grid
+utilizando ajax de la libreria JQuery
+
+
+
