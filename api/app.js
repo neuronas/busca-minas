@@ -2,7 +2,8 @@ var express = require("express"),
     app = express(),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override");
-    mongoose = require('mongoose');
+    grid = require("./grid");
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -13,6 +14,21 @@ var router = express.Router();
 router.get('/', function(req, res) {
    res.send("success");
 });
+
+
+router.get('/grid', function(req, res) {
+
+  grid.build(10, 10, function(res){
+    console.log("res", res)
+    
+  })
+   res.send("grid");
+});
+
+router.post('/open', function(req, res) {
+   res.send("open");
+});
+
 
 app.use(router);
 

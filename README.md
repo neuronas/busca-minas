@@ -2,9 +2,8 @@
 
 
 
-## Inicial API
+## Iniciar API
 
-* lanzar api:
 
 ```bash
 $ node api/app.js
