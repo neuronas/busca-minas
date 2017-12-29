@@ -29,21 +29,22 @@ router.get('/', function(req, res) {
 
 
 router.post('/grid', function(req, result) {
-  // console.log("REQ--1", req.headers)
-  console.log("REQ--2", req.body)
+  // console.log("REQ--2", req.body)
 
   var params = req.body
 
   var matrix = []
 
-  grid.build(req.body.sizeX, req.body.sizeY, function(res){
-    // console.log("res", res)
+  grid.build(params.sizeX, params.sizeY, function(res){
     matrix = res
 
     grid.setMines(matrix, function(res2){
-      var res2 = JSON.stringify(res2)
-      // console.log("res2", res2)
-      result.send(res2);
+
+      grid.setNumbers(res2, function(res3){
+
+        result.send(JSON.stringify(res3));
+      })
+
     })
 
   })
