@@ -1,7 +1,11 @@
 # busca-minas
 
-## API
+
+
+## Inicial API
 
 * lanzar api:
 
-node app.js
+```bash
+$ node api/app.js
+```
