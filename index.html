@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<script src="jquery-3.2.1.min.js"></script>
+
+	<style type="text/css">
+
+    .container {
+	    width: 100%;
+	    margin: auto;
+    }
+
+    #box-left{
+      position: relative;
+      float: left;
+      height:auto;
+      width:300px;
+      background-color: #d5d5d5;
+    }
+    #box-center{
+      position: relative;
+      float: left;
+      height:200px;
+      width:800px;
+      padding:20px;
+      margin: 0 0 0 50px;
+      background-color: #d5d5d5;
+        
+    }
+    #box-left input[type="button"], #box-left input[type="submit"]{
+      padding:10px;
+      width:120px;
+      float:left;
+    }
+    #box-left input[type="text"]{
+      padding:10px;
+      width:50px;
+      float:left;
+    }
+    #box-left ul{
+      list-style: none;
+      position:relative;
+      float:left;
+      padding:0;
+        
+    }
+    #box-left ul li{
+      position:relative;
+      float:left;
+      padding:10px;
+      width:100%;
+        
+    }
+    #ul-bottom{
+      margin-top:100px;
+    }
+
+
+		/* grid */
+
+		.grid {
+		  display: grid;
+		  grid-template-columns: repeat(15, 25px);
+		  grid-template-rows: repeat(15, 25px);
+		}
+
+		/* items */
+
+		.grid div {
+		  color: black;
+		  font-size: 16px;
+		  font-weight: bold;
+		}
+
+		.item {
+	    background: #ccc;
+	    border: solid grey;
+      text-align: center;
+      padding-top: 2px;
+		}
+
+
+
+  </style>
+
+</head>
+<body>
+
+	<div class="container">
+		
+
+		<div id="box-left">
+		    
+	    <ul>
+	      <li>
+	      	<input type="button" value="get-grid" id="get-grid">
+	      </li>
+	      <li>
+	        <input type="button" value="GET" id="test-get">
+	        <input type="text" value="1" id="user-id">
+	      </li>
+	    </ul>
+	    
+	    <br>
+
+		</div>
+		<div id="box-center">
+			
+			<section class="grid">
+				
+			</section>
+
+		</div>
+		
+	</div>
+
+
+
+
+
+
+	<script>
+
+		// $( window ).on( "load", readyFn );
+    $(document).ready(function() {
+      console.log("READY");
+
+      $("#get-grid").on('click', function() {
+          
+        console.log("CLICK");
+				// var data = JSON.stringify({ "sizeX": 10, "sizeY": 10 })
+				var data = { "sizeX": 5, "sizeY": 5 }
+
+        $.ajax({
+				  type: 'POST',
+				  url: 'http://localhost:3000/grid',
+				  data: data,
+				  success: function(data) {
+          	
+          	data = JSON.parse(data)
+          	console.log("RES DATA TYPE", typeof data)
+			      var count = 0;
+						$.each(data, function(key, val){
+          		console.log("grid", val, key)
+              $(".grid").append('<div id="' + count + '" class="item"></div>');
+		          count++;
+            });
+
+				  },
+				  error: function(data) {
+          	console.log("ERR", data)
+				  }
+				});
+
+      });
+    })
+
+
+	</script>
+</body>
+</html>
