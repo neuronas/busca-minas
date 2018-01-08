@@ -5,13 +5,13 @@
 
 se utilizo un servidor NODE con Express que se instala rapidamente y su implementacion es simple
 
-para instalar las librerias en el ambiente que se va a correr, (dentro del directorio /api)
+para instalar las librerias en el ambiente que se va a correr, (desde el directorio /api) ejecutar:
 
 ```bash
 $ npm install
 ```
 
-para levantar el servidor api REST desde el directorio raiz:
+para correr el servidor api REST desde el directorio raiz:
 
 ```bash
 $ node api/app.js
@@ -19,7 +19,7 @@ $ node api/app.js
 
 inicia el servidor en http://localhost:3000
 
-(para su uso y teteo en ambiente local se habilitaron las llamadas curl modificando los HEADERS que espera el servidor)
+(para su uso y testeo en ambiente local se habilitaron las llamadas curl modificando los HEADERS que espera el servidor)
 
 ## cliente
 

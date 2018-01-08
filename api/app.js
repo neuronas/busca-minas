@@ -41,7 +41,6 @@ router.post('/grid', function(req, result) {
     grid.setMines(matrix, function(res2){
 
       grid.setNumbers(res2, function(res3){
-
         result.send(JSON.stringify(res3));
       })
 
@@ -53,7 +52,20 @@ router.post('/grid', function(req, result) {
 });
 
 router.post('/open', function(req, res) {
-   res.send("open");
+
+  var params = req.body
+  console.log("OPEN... ", params.posX, params.posY)
+
+  var x = params.posX
+  var y = params.posY
+  var matrix = JSON.parse(params.matrix)
+
+  grid.open(x, y, matrix, function(res2) {
+    
+    res.send(JSON.stringify(res2));
+    // res.end();
+  })
+
 });
 
 

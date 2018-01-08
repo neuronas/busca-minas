@@ -122,6 +122,8 @@
 
 	<script>
 
+		var matrix = []
+
 		// $( window ).on( "load", readyFn );
     $(document).ready(function() {
       console.log("READY");
@@ -142,20 +144,28 @@
 				  data: data,
 				  success: function(data) {
           	
+          	matrix = data;
           	data = JSON.parse(data)
 			      var count = 0;
 
 						$.each(data, function(key, val){
 	          		// console.log("grid", val, key)
-							$.each(data, function(key2, val2){
+							$.each(val, function(key2, val2){
+
+          			// console.log("VALUES", key2, val2)
 
 	          		var value = val[key2]
+          			// console.log("VALUES", value)
+
 	          		var div = $("<div></div>")
 	          		div.addClass("item")
           			div.attr("id", count)
-          			if (value) {
+          			// console.log("VALUES", key, key2)
+          			var keys = { posX: key, posY: key2 }
+          			div.attr("value", JSON.stringify(keys))
+          			// if (value) {
           				div.text(value)
-          			}
+          			// }
 	              $(".grid").append(div);
 			          count++;
 		          })
@@ -176,7 +186,49 @@
     function attachEvent() {
       $(".item").on("click", function(elem) {
 
-      	elem.target.style.backgroundColor='red'
+      	// elem.target.style.backgroundColor='red'
+      	elem = elem.target
+      	$(elem).css("backgroundColor", 'red')
+
+      	var value = JSON.parse($(elem).attr("value"))
+      	value.matrix = matrix
+
+      	var data = value
+      	console.log("DATA", data)
+        $.ajax({
+				  type: 'POST',
+				  url: 'http://localhost:3000/open',
+				  data: data,
+				  success: function(data) {
+          	
+          	console.log("SUCCESS_open", data)
+          	data = JSON.parse(data)
+			      var count = 0;
+
+          	$.each(data, function(key, val){
+	          		// console.log("grid", val, key)
+							$.each(val, function(key2, val2){
+								// console.log("ELEMM", key2)
+								if (val2 == true) {
+									console.log("ELEMM", $("#"+count))
+									$("#"+count).css("backgroundColor", 'yellow')
+								} else if (val2 == 'mine') {
+									$("#"+count).css("backgroundColor", 'red')
+									$("#"+count).text("✲")
+								}
+
+
+
+			          count++;
+							})
+						})
+
+				  },
+				  error: function(data) {
+          	console.log("ERR_open", data)
+				  }
+				});
+
       })
     }
 
