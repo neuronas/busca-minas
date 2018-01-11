@@ -1,8 +1,9 @@
-var express = require("express"),
-    app = express(),
-    bodyParser  = require("body-parser"),
-    methodOverride = require("method-override");
-    grid = require("./grid");
+const express = require("express"),
+      app = express(),
+      bodyParser  = require("body-parser"),
+      methodOverride = require("method-override"),
+      grid = require("./grid"),
+      PORT = process.env.PORT || 5000;
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'dev') {
   // if (process.env.NODE_ENV !== 'prod') {
   //   require('dotenv').config()
   // }
-  
+
   var dotenv = require('dotenv');
   // There's no need to check if .env exists, dotenv will check this // for you. It will show a small warning which can be disabled when // using this in production.
   dotenv.load();
@@ -91,6 +92,6 @@ app.use((req, res) => {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
-app.listen(3000, function() {
-  console.log("Node server running on http://localhost:3000");
+app.listen(PORT, function() {
+  console.log("Node server running on http://localhost:"+PORT);
 });
