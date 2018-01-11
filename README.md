@@ -26,5 +26,6 @@ inicia el servidor en http://localhost:3000
 el cliente es un archivo index.html que accede al recurso (POST) http://localhost:3000/grid
 utilizando ajax de la libreria JQuery
 
+Demo [https://neuronas.github.io/busca-minas/](https://neuronas.github.io/busca-minas/)
 
 
