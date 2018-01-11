@@ -12,11 +12,26 @@ app.use(methodOverride());
 var router = express.Router();
 
 
-// app.all('/*', function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   next();
-// });
+
+console.log("process.env:  ", process.env.API_URI)
+
+if (process.env.NODE_ENV === 'dev') {
+  
+  // if (process.env.NODE_ENV !== 'prod') {
+  //   require('dotenv').config()
+  // }
+  
+  var dotenv = require('dotenv');
+  // There's no need to check if .env exists, dotenv will check this // for you. It will show a small warning which can be disabled when // using this in production.
+  dotenv.load();
+
+  // cors
+  app.all('/*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+  });
+}
 
 
 
@@ -70,6 +85,11 @@ router.post('/open', function(req, res) {
 
 
 app.use(router);
+
+// Middlewar
+app.use((req, res) => {
+  res.status(404).send({url: req.originalUrl + ' not found'})
+});
 
 app.listen(3000, function() {
   console.log("Node server running on http://localhost:3000");

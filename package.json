@@ -3,12 +3,17 @@
  "version": "2.0.0",
  "dependencies": {
   "body-parser": "^1.5.1",
+  "dotenv": "^4.0.0",
   "express": "^4.7.1",
   "lodash": "^4.17.4",
   "method-override": "^2.1.2"
  },
-  "repository": {
+ "repository": {
   "type": "git",
   "url": "https://github.com/neuronas/busca-minas"
-  }
+ },
+ "scripts": {
+   "prod": "NODE_ENV=prod node api/app.js",
+   "dev": "NODE_ENV=dev node api/app.js"
+ }
 }

@@ -1,2 +1,2 @@
-web: node api/app.js --color=always
+web: npm run prod --color=always
 
